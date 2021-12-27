@@ -1,3 +1,5 @@
+import { Sequelize } from 'sequelize';
+
 export interface IUser {
   id: number;
   email: string;
@@ -5,8 +7,14 @@ export interface IUser {
   lastName: string;
   firstName: string;
   role: 'admin' | 'user';
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date;
 }
 
+// Update this when the models increase
 export interface IModels {
-  user: IUser;
+  User: IUser;
+  sequelize: Sequelize;
+  Sequelize: Sequelize;
 }

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Op, Sequelize, Model } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 import moment from 'moment';
 
 export const findAll =

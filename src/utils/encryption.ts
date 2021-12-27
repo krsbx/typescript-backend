@@ -10,3 +10,8 @@ export const compare = async (
   inputPassword: string,
   originalPassword: string
 ) => await bcrypt.compare(inputPassword, originalPassword);
+
+export default {
+  encrypt,
+  compare,
+};

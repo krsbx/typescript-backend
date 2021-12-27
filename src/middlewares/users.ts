@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { Request, Response, NextFunction } from 'express';
 // @ts-ignore
 import asyncMw from 'async-express-mw';
-import token from '../utils/jwt';
+import { verifyAccessToken } from '../utils/jwt';
 import repository from '../repository';
 
 // Need to extend the Request interface to add the user property
@@ -15,7 +15,7 @@ export const authMw = asyncMw(
 
     const accessToken = authorizationHeader.split(' ')[1];
 
-    token.verifyAccessToken(accessToken, async (err, payload) => {
+    verifyAccessToken(accessToken, async (err, payload) => {
       if (err) return res.status(401).json({ message: 'Unauthorized' });
 
       // @ts-ignore

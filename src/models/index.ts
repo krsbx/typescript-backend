@@ -1,14 +1,17 @@
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
+import fs from 'fs';
+import path from 'path';
+import { Sequelize, DataTypes } from 'sequelize';
+import { IModels } from '../utils/modelInterfaces';
+
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(path.resolve(__dirname, '../config/config.ts'))[env];
 const db: any = {};
 
-let sequelize: any;
+let sequelize: Sequelize;
 
 if (config.use_env_variable) {
+  // @ts-ignore
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(
@@ -26,10 +29,7 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach((file: string) => {
-    const model = require(path.join(__dirname, file))(
-      sequelize,
-      Sequelize.DataTypes
-    );
+    const model = require(path.join(__dirname, file))(sequelize, DataTypes);
 
     db[model.name] = model;
   });
@@ -43,4 +43,4 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export default db;
+export default db as IModels;

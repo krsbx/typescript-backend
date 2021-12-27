@@ -1,7 +1,5 @@
-import { QueryInterface, DataTypes } from 'sequelize';
-
 module.exports = {
-  up: async (queryInterface: QueryInterface, Sequelize: typeof DataTypes) => {
+  up: async (queryInterface: any, Sequelize: any) => {
     await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
@@ -15,10 +13,13 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
       },
+      firstName: {
+        type: Sequelize.STRING,
+      },
       lastName: {
         type: Sequelize.STRING,
       },
-      firstName: {
+      avatar: {
         type: Sequelize.STRING,
       },
       role: {
@@ -37,7 +38,7 @@ module.exports = {
       },
     });
   },
-  down: async (queryInterface: QueryInterface, Sequelize: typeof DataTypes) => {
+  down: async (queryInterface: any, Sequelize: any) => {
     await queryInterface.dropTable('Users');
   },
 };
